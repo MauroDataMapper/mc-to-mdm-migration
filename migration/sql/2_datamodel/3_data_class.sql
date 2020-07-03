@@ -29,7 +29,9 @@ BEGIN
                 FROM maurodatamapper.metadatacatalogue.data_class dc
                      LEFT JOIN maurodatamapper.core.breadcrumb_tree bt ON dc.id = bt.domain_id
                 WHERE bt.id IS NULL);
+    RAISE NOTICE 'Loaded top level DataClasses';
 
+    RAISE NOTICE 'DataClasses left to load %', counter;
     IF (counter = 0)
     THEN
         RETURN;
@@ -37,8 +39,8 @@ BEGIN
 
     WHILE counter <> 0
         LOOP
-
-            INSERT INTO maurodatamapper.core.breadcrumb_tree(id, version, domain_type, finalised, domain_id, tree_string, top_breadcrumb_tree, label,
+            INSERT INTO maurodatamapper.core.breadcrumb_tree(id, version, domain_type, finalised, domain_id, tree_string, top_breadcrumb_tree,
+                                                             label,
                                                              parent_id)
             SELECT uuid_generate_v4() AS id,
                    0                  AS version,
@@ -53,21 +55,25 @@ BEGIN
             FROM maurodatamapper.metadatacatalogue.data_class dc
                  INNER JOIN maurodatamapper.metadatacatalogue.catalogue_item ci ON ci.id = dc.id
                  LEFT JOIN maurodatamapper.core.breadcrumb_tree pcbt ON pcbt.domain_id = dc.parent_data_class_id
+                 LEFT JOIN maurodatamapper.core.breadcrumb_tree bt ON dc.id = bt.domain_id
             WHERE parent_data_class_id IS NOT NULL AND
-                  pcbt.id IS NOT NULL;
+                  pcbt.id IS NOT NULL AND
+                  bt.id IS NULL;
 
             counter := (SELECT count(*)
                         FROM maurodatamapper.metadatacatalogue.data_class dc
                              LEFT JOIN maurodatamapper.core.breadcrumb_tree bt ON dc.id = bt.domain_id
                         WHERE bt.id IS NULL);
+            RAISE NOTICE 'DataClasses left to load %', counter;
+
         END LOOP;
 
     RETURN;
-END ;
+END;
 $$ LANGUAGE plpgsql;
 
 -- Actually build the BTs
-CALL public.buildBreadcrumbTree();
+CALL datamodel.buildBreadcrumbTree();
 
 -- Clean up by removing the procedure
 DROP PROCEDURE datamodel.buildBreadcrumbTree();
