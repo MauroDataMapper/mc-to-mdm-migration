@@ -29,3 +29,5 @@ FROM maurodatamapper.metadatacatalogue.semantic_link sl
      INNER JOIN maurodatamapper.metadatacatalogue.catalogue_user u ON sl.created_by_id = u.id
      LEFT JOIN maurodatamapper.metadatacatalogue.catalogue_item sci ON sl.source_catalogue_item_id = sci.id
      LEFT JOIN maurodatamapper.metadatacatalogue.catalogue_item tci ON sl.target_catalogue_item_id = tci.id
+WHERE sl.link_type IN ('REFINES',
+                       'DOES_NOT_REFINE')
