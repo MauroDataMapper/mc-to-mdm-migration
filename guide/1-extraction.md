@@ -19,7 +19,7 @@ docker ps
 * The basic setup will result in the name `mc-docker_postgres_1`.
 ```bash
 cd mc-to-mdm-migration/mc-extraction
-docker exec -it mc-docker_postgres_1 pg_dump -F p -U postgres catalogue > output/mc-dump.sql
+docker exec -it mc-docker_postgres_1 pg_dump -F p -n public -U postgres catalogue > output/mc-dump.sql
 ```
 
 ### Remote/Local PostgreSQL
@@ -32,7 +32,7 @@ If you have PostgreSQL running locally or on an external server then follow thes
 1. Execute the following command whilst inside the `mc-to-mdm-migration/mc-extraction` directory
 ```bash
 cd mc-to-mdm-migration/mc-extraction
-pg_dump -F p -U postgres catalogue > output/mc-dump.sql
+pg_dump -F p -n public -U postgres catalogue > output/mc-dump.sql
 ```
 
 #### Mac OS X PostgreSQL Commands

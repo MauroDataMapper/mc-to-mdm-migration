@@ -32,7 +32,7 @@ If you have PostgreSQL running locally or on an external server then follow thes
 1. Execute the following command whilst inside the `mc-to-mdm-migration/mc-extraction` directory
 ```bash
 cd mc-to-mdm-migration/mc-extraction
-psql -U postgres maurodatamapper < output/mc-dump-to-load.sql
+cat output/mc-dump-to-load.sql | psql -U postgres maurodatamapper
 ```
 
 ## Tidy Up / Backup
