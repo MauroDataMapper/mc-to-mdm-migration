@@ -37,12 +37,12 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 
 # Process the folder running each file in order into the docker container
 function process_folder {
-  echo "> Migrating $1"
+  echo "Migrating $1"
   pushd $1
 
   for f in *.sql
   do
-    echo ">> Running $f"
+    echo "  Running $f"
     cat $f | docker exec -i $DOCKER_CONTAINER psql -U postgres $DATABASE
   done
   popd
