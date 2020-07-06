@@ -33,7 +33,8 @@ GROUP BY ci.label;
  Put users into groups
  */
 INSERT INTO maurodatamapper.security.join_catalogue_user_to_user_group(catalogue_user_id, user_group_id)
-SELECT catalogue_user_id,
+SELECT DISTINCT
+       catalogue_user_id,
        ug.id AS user_group_id
 FROM maurodatamapper.metadatacatalogue.join_data_model_to_readable_catalogue_user jc
      INNER JOIN maurodatamapper.metadatacatalogue.data_model dm ON dm.id = jc.data_model_id
@@ -41,7 +42,8 @@ FROM maurodatamapper.metadatacatalogue.join_data_model_to_readable_catalogue_use
      INNER JOIN maurodatamapper.security.user_group ug ON ug.name = concat('DataModel_', ci.label, '_migrated-direct-reader');
 
 INSERT INTO maurodatamapper.security.join_catalogue_user_to_user_group(catalogue_user_id, user_group_id)
-SELECT catalogue_user_id,
+SELECT DISTINCT
+       catalogue_user_id,
        ug.id AS user_group_id
 FROM maurodatamapper.metadatacatalogue.join_data_model_to_writeable_catalogue_user jc
      INNER JOIN maurodatamapper.metadatacatalogue.data_model dm ON dm.id = jc.data_model_id

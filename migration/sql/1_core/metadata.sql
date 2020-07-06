@@ -22,3 +22,7 @@ SELECT m.id,
 FROM maurodatamapper.metadatacatalogue.metadata m
      INNER JOIN maurodatamapper.metadatacatalogue.catalogue_user u ON m.created_by_id = u.id
      LEFT JOIN maurodatamapper.metadatacatalogue.catalogue_item ci ON m.catalogue_item_id = ci.id
+WHERE catalogue_item_id IS NOT NULL OR
+      terminology_id IS NOT NULL OR
+      code_set_id IS NOT NULL OR
+      term_id IS NOT NULL

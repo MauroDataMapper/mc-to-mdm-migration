@@ -31,14 +31,16 @@ GROUP BY cl.label;
  Put users into groups
  */
 INSERT INTO maurodatamapper.security.join_catalogue_user_to_user_group(catalogue_user_id, user_group_id)
-SELECT catalogue_user_id,
+SELECT DISTINCT
+       catalogue_user_id,
        ug.id AS user_group_id
 FROM maurodatamapper.metadatacatalogue.join_classifier_to_readable_catalogue_user jc
      INNER JOIN maurodatamapper.metadatacatalogue.classifier cl ON cl.id = jc.classifier_id
      INNER JOIN maurodatamapper.security.user_group ug ON ug.name = concat('Classifier_', cl.label, '_migrated-direct-reader');
 
 INSERT INTO maurodatamapper.security.join_catalogue_user_to_user_group(catalogue_user_id, user_group_id)
-SELECT catalogue_user_id,
+SELECT DISTINCT
+       catalogue_user_id,
        ug.id AS user_group_id
 FROM maurodatamapper.metadatacatalogue.join_classifier_to_writeable_catalogue_user jc
      INNER JOIN maurodatamapper.metadatacatalogue.classifier cl ON cl.id = jc.classifier_id
