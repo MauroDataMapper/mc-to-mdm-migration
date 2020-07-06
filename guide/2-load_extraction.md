@@ -11,7 +11,7 @@ The following steps assume you have
 
 ## MDM-Docker Based PostgreSQL
 
-If you run Mauro Data Mapper using mc-docker then follow these instructions
+If you run Mauro Data Mapper using mdm-docker then follow these instructions
 
 1. Identify the name of the postgres container using command line
 ```bash
