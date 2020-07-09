@@ -68,7 +68,7 @@ function process_folder {
   for f in *.sql
   do
     echo ">> Running $f"
-    echo "cat $f | psql $DB_ARGS $DATABASE"
+    cat $f | psql $DB_ARGS $DATABASE
   done
   popd
   echo
@@ -104,7 +104,7 @@ cd sql
 
 # Install required dependencies
 echo "Installing dependencies"
-echo "cat install.sql | psql $DB_ARGS $DATABASE"
+cat install.sql | psql $DB_ARGS $DATABASE
 
 echo
 
