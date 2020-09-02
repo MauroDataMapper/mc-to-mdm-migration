@@ -63,18 +63,14 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 
 if [ $USAGE ]
 then
-  echo "Usage:: run-migration-docker.sh [--help] [-c MDM_CONTAINER_NAME] [-m MC_CONTAINER_NAME] [-d MDM_DATABASE]"
+  echo "Usage:: run-migration-remote.sh [--help] [-d MDM_DATABASE]"
   echo
-  echo "  -c MDM_CONTAINER_NAME  :  Optional argument to set the mdm docker container to"
-  echo "                            execute the migration against."
-  echo "  -m MC_CONTAINER_NAME   :  Optional argument to set the mc docker container to"
-  echo "                            execute the migration against."
-  echo "                            Default: mdm-docker_postgres_1"
   echo "  -d MDM_DATABASE        :  Optional argument to set the mdm database inside to"
   echo "                            the docker container execute the migration against."
+  echo "                            Default: maurodatamapper"
   echo "  -o MC_DATABASE         :  Optional argument to set the mc database inside to"
   echo "                            the docker container execute the migration against."
-  echo "                            Default: maurodatamapper"
+  echo "                            Default: catalogue"
   echo "  -h MDM_HOST            :  Optional argument to set the mdm database host"
   echo "                            Default: localhost"
   echo "  -p MDM_PORT            :  Optional argument to set the mdm database port"
@@ -91,22 +87,6 @@ fi
 ##################
 
 echo "Performing complete non-interactive migration"
-
-if [ -n "$MDM_DOCKER_CONTAINER" ]
-then
-  echo "Using docker container $MDM_DOCKER_CONTAINER"
-else
-  MDM_DOCKER_CONTAINER='mdm-docker_postgres_1'
-  echo "Using default docker container mdm-docker_postgres_1"
-fi
-
-if [ -n "$MC_DOCKER_CONTAINER" ]
-then
-  echo "Using docker container $MC_DOCKER_CONTAINER"
-else
-  MC_DOCKER_CONTAINER='mc-docker_postgres_1'
-  echo "Using default docker container mc-docker_postgres_1"
-fi
 
 if [ -n "$MDM_DATABASE" ]
 then
@@ -181,7 +161,19 @@ echo "<< Stage 3>>"
 echo "  Performing SQL migration"
 pushd migration
 
-./run-migration-docker.sh -d $MDM_DATABASE -c $MDM_DOCKER_CONTAINER -h $MDM_HOST -p $MDM_PORT
+RUN_ARGS=$MDM_DATABASE
+
+if [ -n "$MDM_HOST" ]
+then
+  RUN_ARGS="$RUN_ARGS -h $MDM_HOST "
+fi
+
+if [ -n "$MDM_PORT" ]
+then
+  RUN_ARGS="$RUN_ARGS -p $MDM_PORT "
+fi
+
+./run-migration-remote.sh -d $MDM_DATABASE $RUN_ARGS
 
 popd
 
