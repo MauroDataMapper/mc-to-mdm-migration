@@ -12,7 +12,8 @@ FROM maurodatamapper.metadatacatalogue.code_set;
 
 INSERT INTO maurodatamapper.terminology.code_set(id, version, date_created, finalised, readable_by_authenticated_users, date_finalised,
                                                  documentation_version, readable_by_everyone, model_type, last_updated, organisation, deleted,
-                                                 author, breadcrumb_tree_id, folder_id, created_by, aliases_string, label, description)
+                                                 author, breadcrumb_tree_id, folder_id, created_by, aliases_string, label, description,
+                                                 authority_id, branch_name, model_version)
 SELECT cs.id,
        cs.version,
        cs.date_created,
@@ -26,12 +27,18 @@ SELECT cs.id,
        cs.organisation,
        deleted,
        author,
-       bt.id AS breadcrumb_tree_id,
+       bt.id  AS breadcrumb_tree_id,
        folder_id,
        u.email_address,
        aliases_string,
        cs.label,
-       description
+       description,
+       NULL   AS authority_id,
+       'main' AS branchName,
+       CASE
+           WHEN cs.finalised = TRUE
+               THEN '1.0.0'
+       END    AS model_version
 FROM maurodatamapper.metadatacatalogue.code_set cs
      INNER JOIN maurodatamapper.core.breadcrumb_tree bt ON bt.domain_id = cs.id
      INNER JOIN maurodatamapper.metadatacatalogue.catalogue_user u ON cs.created_by_id = u.id;

@@ -13,7 +13,8 @@ FROM maurodatamapper.metadatacatalogue.data_model dm
 
 INSERT INTO maurodatamapper.datamodel.data_model(id, version, date_created, finalised, readable_by_authenticated_users, date_finalised,
                                                  documentation_version, readable_by_everyone, model_type, last_updated, organisation, deleted, author,
-                                                 breadcrumb_tree_id, folder_id, created_by, aliases_string, label, description)
+                                                 breadcrumb_tree_id, folder_id, created_by, aliases_string, label, description, authority_id,
+                                                 branch_name, model_version)
 SELECT ci.id,
        ci.version,
        ci.date_created,
@@ -22,17 +23,28 @@ SELECT ci.id,
        date_finalised,
        documentation_version,
        readable_by_everyone,
-       type,
+       CASE
+           WHEN type IN ('DATA_ASSET', 'Data Asset')
+               THEN 'Data Asset'
+           WHEN type IN ('DATA_STANDARD', 'Data Standard')
+               THEN 'Data Standard'
+       END    AS model_type,
        ci.last_updated,
        dm.organisation,
        deleted,
        author,
-       bt.id AS breadcrumb_tree_id,
+       bt.id  AS breadcrumb_tree_id,
        folder_id,
        u.email_address,
        aliases_string,
        ci.label,
-       description
+       description,
+       NULL   AS authority_id,
+       'main' AS branchName,
+       CASE
+           WHEN dm.finalised = TRUE
+               THEN '1.0.0'
+       END    AS model_version
 FROM maurodatamapper.metadatacatalogue.data_model dm
      INNER JOIN maurodatamapper.metadatacatalogue.catalogue_item ci ON ci.id = dm.id
      INNER JOIN maurodatamapper.core.breadcrumb_tree bt ON bt.domain_id = ci.id
