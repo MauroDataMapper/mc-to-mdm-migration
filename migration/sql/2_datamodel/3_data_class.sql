@@ -136,7 +136,7 @@ SELECT dc.id AS dataclass_id,
        NULL  AS metadata_id,
        NULL  AS summary_metadata_id
 FROM maurodatamapper.datamodel.data_class dc
-     INNER JOIN maurodatamapper.core.semantic_link sl ON sl.catalogue_item_id = dc.id AND sl.catalogue_item_domain_type = 'DataClass'
+     INNER JOIN maurodatamapper.core.semantic_link sl ON sl.catalogue_item_id = dc.id AND sl.catalogue_item_domain_type = 'DataClass';
 
 INSERT INTO maurodatamapper.datamodel.join_dataclass_to_facet(dataclass_id, classifier_id, annotation_id, semantic_link_id, reference_file_id,
                                                               metadata_id, summary_metadata_id)
