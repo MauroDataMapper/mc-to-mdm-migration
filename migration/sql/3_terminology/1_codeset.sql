@@ -33,7 +33,7 @@ SELECT cs.id,
        aliases_string,
        cs.label,
        description,
-       NULL   AS authority_id,
+       (select id from maurodatamapper.core.authority limit 1)   AS authority_id,
        'main' AS branchName,
        CASE
            WHEN cs.finalised = TRUE

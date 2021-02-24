@@ -4,7 +4,7 @@ SELECT uuid_generate_v4()                                                       
        domain_type,
        finalised,
        dm.id                                                                                                   AS domain_id,
-       concat(dm.id, '|', domain_type, '|', label, '|', CASE finalised WHEN TRUE THEN 'true' ELSE 'false' END) AS tree_string,
+       CONCAT(dm.id, '|', domain_type, '|', label, '|', CASE finalised WHEN TRUE THEN 'true' ELSE 'false' END) AS tree_string,
        TRUE                                                                                                    AS top_breadcrumb_tree,
        label,
        NULL                                                                                                    AS parent_id
@@ -28,23 +28,25 @@ SELECT ci.id,
                THEN 'Data Asset'
            WHEN type IN ('DATA_STANDARD', 'Data Standard')
                THEN 'Data Standard'
-       END    AS model_type,
+       END       AS model_type,
        ci.last_updated,
        dm.organisation,
        deleted,
        author,
-       bt.id  AS breadcrumb_tree_id,
+       bt.id     AS breadcrumb_tree_id,
        folder_id,
        u.email_address,
        aliases_string,
        ci.label,
        description,
-       NULL   AS authority_id,
-       'main' AS branchName,
+       (SELECT id
+        FROM maurodatamapper.core.authority
+        LIMIT 1) AS authority_id,
+       'main'    AS branchName,
        CASE
            WHEN dm.finalised = TRUE
                THEN '1.0.0'
-       END    AS model_version
+       END       AS model_version
 FROM maurodatamapper.metadatacatalogue.data_model dm
      INNER JOIN maurodatamapper.metadatacatalogue.catalogue_item ci ON ci.id = dm.id
      INNER JOIN maurodatamapper.core.breadcrumb_tree bt ON bt.domain_id = ci.id
