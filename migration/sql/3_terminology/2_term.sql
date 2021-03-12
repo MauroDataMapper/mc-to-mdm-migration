@@ -25,7 +25,7 @@ SELECT t.id,
        concat('/', t.terminology_id)      AS path,
        CASE
            WHEN depth IS NULL
-               THEN 1
+               THEN -2147483647
            WHEN depth = 0
                THEN 2147483647
            ELSE depth
