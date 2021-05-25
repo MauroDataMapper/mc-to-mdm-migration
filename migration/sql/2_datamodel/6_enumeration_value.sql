@@ -57,7 +57,7 @@ SELECT ev.id  AS enumerationvalue_id,
        NULL   AS reference_file_id,
        NULL   AS metadata_id
 FROM maurodatamapper.datamodel.enumeration_value ev
-     INNER JOIN maurodatamapper.core.annotation ann ON ann.catalogue_item_id = ev.id AND ann.catalogue_item_domain_type = 'EnumerationValue';
+     INNER JOIN maurodatamapper.core.annotation ann ON ann.multi_facet_aware_item_id = ev.id AND ann.multi_facet_aware_item_domain_type = 'EnumerationValue';
 
 INSERT INTO maurodatamapper.datamodel.join_enumerationvalue_to_facet(enumerationvalue_id, classifier_id, annotation_id, semantic_link_id,
                                                                      reference_file_id,
@@ -69,7 +69,7 @@ SELECT ev.id AS enumerationvalue_id,
        NULL  AS reference_file_id,
        NULL  AS metadata_id
 FROM maurodatamapper.datamodel.enumeration_value ev
-     INNER JOIN maurodatamapper.core.semantic_link sl ON sl.catalogue_item_id = ev.id AND sl.catalogue_item_domain_type = 'EnumerationValue';
+     INNER JOIN maurodatamapper.core.semantic_link sl ON sl.multi_facet_aware_item_id = ev.id AND sl.multi_facet_aware_item_domain_type = 'EnumerationValue';
 
 INSERT INTO maurodatamapper.datamodel.join_enumerationvalue_to_facet(enumerationvalue_id, classifier_id, annotation_id, semantic_link_id,
                                                                      reference_file_id,
@@ -81,7 +81,7 @@ SELECT ev.id AS enumerationvalue_id,
        rf.id AS reference_file_id,
        NULL  AS metadata_id
 FROM maurodatamapper.datamodel.enumeration_value ev
-     INNER JOIN maurodatamapper.core.reference_file rf ON rf.catalogue_item_id = ev.id AND rf.catalogue_item_domain_type = 'EnumerationValue';
+     INNER JOIN maurodatamapper.core.reference_file rf ON rf.multi_facet_aware_item_id = ev.id AND rf.multi_facet_aware_item_domain_type = 'EnumerationValue';
 
 INSERT INTO maurodatamapper.datamodel.join_enumerationvalue_to_facet(enumerationvalue_id, classifier_id, annotation_id, semantic_link_id,
                                                                      reference_file_id,
@@ -93,4 +93,4 @@ SELECT ev.id AS enumerationvalue_id,
        NULL  AS reference_file_id,
        md.id AS metadata_id
 FROM maurodatamapper.datamodel.enumeration_value ev
-     INNER JOIN maurodatamapper.core.metadata md ON md.catalogue_item_id = ev.id AND md.catalogue_item_domain_type = 'EnumerationValue'
+     INNER JOIN maurodatamapper.core.metadata md ON md.multi_facet_aware_item_id = ev.id AND md.multi_facet_aware_item_domain_type = 'EnumerationValue'

@@ -124,7 +124,7 @@ SELECT dc.id  AS dataclass_id,
        NULL   AS metadata_id,
        NULL   AS summary_metadata_id
 FROM maurodatamapper.datamodel.data_class dc
-     INNER JOIN maurodatamapper.core.annotation ann ON ann.catalogue_item_id = dc.id AND ann.catalogue_item_domain_type = 'DataClass';
+     INNER JOIN maurodatamapper.core.annotation ann ON ann.multi_facet_aware_item_id = dc.id AND ann.multi_facet_aware_item_domain_type = 'DataClass';
 
 INSERT INTO maurodatamapper.datamodel.join_dataclass_to_facet(dataclass_id, classifier_id, annotation_id, semantic_link_id, reference_file_id,
                                                               metadata_id, summary_metadata_id)
@@ -136,7 +136,7 @@ SELECT dc.id AS dataclass_id,
        NULL  AS metadata_id,
        NULL  AS summary_metadata_id
 FROM maurodatamapper.datamodel.data_class dc
-     INNER JOIN maurodatamapper.core.semantic_link sl ON sl.catalogue_item_id = dc.id AND sl.catalogue_item_domain_type = 'DataClass';
+     INNER JOIN maurodatamapper.core.semantic_link sl ON sl.multi_facet_aware_item_id = dc.id AND sl.multi_facet_aware_item_domain_type = 'DataClass';
 
 INSERT INTO maurodatamapper.datamodel.join_dataclass_to_facet(dataclass_id, classifier_id, annotation_id, semantic_link_id, reference_file_id,
                                                               metadata_id, summary_metadata_id)
@@ -148,7 +148,7 @@ SELECT dc.id AS dataclass_id,
        NULL  AS metadata_id,
        NULL  AS summary_metadata_id
 FROM maurodatamapper.datamodel.data_class dc
-     INNER JOIN maurodatamapper.core.reference_file rf ON rf.catalogue_item_id = dc.id AND rf.catalogue_item_domain_type = 'DataClass';
+     INNER JOIN maurodatamapper.core.reference_file rf ON rf.multi_facet_aware_item_id = dc.id AND rf.multi_facet_aware_item_domain_type = 'DataClass';
 
 INSERT INTO maurodatamapper.datamodel.join_dataclass_to_facet(dataclass_id, classifier_id, annotation_id, semantic_link_id, reference_file_id,
                                                               metadata_id, summary_metadata_id)
@@ -160,7 +160,7 @@ SELECT dc.id AS dataclass_id,
        md.id AS metadata_id,
        NULL  AS summary_metadata_id
 FROM maurodatamapper.datamodel.data_class dc
-     INNER JOIN maurodatamapper.core.metadata md ON md.catalogue_item_id = dc.id AND md.catalogue_item_domain_type = 'DataClass';
+     INNER JOIN maurodatamapper.core.metadata md ON md.multi_facet_aware_item_id = dc.id AND md.multi_facet_aware_item_domain_type = 'DataClass';
 
 INSERT INTO maurodatamapper.datamodel.join_dataclass_to_facet(dataclass_id, classifier_id, annotation_id, semantic_link_id, reference_file_id,
                                                               metadata_id, summary_metadata_id)
@@ -172,4 +172,4 @@ SELECT dc.id AS dataclass_id,
        NULL  AS metadata_id,
        sm.id AS summary_metadata_id
 FROM maurodatamapper.datamodel.data_class dc
-     INNER JOIN maurodatamapper.datamodel.summary_metadata sm ON sm.catalogue_item_id = dc.id AND sm.catalogue_item_domain_type = 'DataClass';
+     INNER JOIN maurodatamapper.datamodel.summary_metadata sm ON sm.multi_facet_aware_item_id = dc.id AND sm.multi_facet_aware_item_domain_type = 'DataClass';

@@ -45,7 +45,7 @@ SELECT t.id   AS termrelationship_id,
        NULL   AS reference_file_id,
        NULL   AS metadata_id
 FROM maurodatamapper.terminology.term_relationship t
-     INNER JOIN maurodatamapper.core.annotation ann ON ann.catalogue_item_id = t.id AND ann.catalogue_item_domain_type = 'TermRelationship';
+     INNER JOIN maurodatamapper.core.annotation ann ON ann.multi_facet_aware_item_id = t.id AND ann.multi_facet_aware_item_domain_type = 'TermRelationship';
 
 INSERT INTO maurodatamapper.terminology.join_termrelationship_to_facet(termrelationship_id, classifier_id, annotation_id,
                                                                        semantic_link_id, reference_file_id,
@@ -57,7 +57,7 @@ SELECT t.id  AS termrelationship_id,
        NULL  AS reference_file_id,
        NULL  AS metadata_id
 FROM maurodatamapper.terminology.term_relationship t
-     INNER JOIN maurodatamapper.core.semantic_link sl ON sl.catalogue_item_id = t.id AND sl.catalogue_item_domain_type = 'TermRelationship';
+     INNER JOIN maurodatamapper.core.semantic_link sl ON sl.multi_facet_aware_item_id = t.id AND sl.multi_facet_aware_item_domain_type = 'TermRelationship';
 
 INSERT INTO maurodatamapper.terminology.join_termrelationship_to_facet(termrelationship_id, classifier_id, annotation_id,
                                                                        semantic_link_id, reference_file_id,
@@ -69,7 +69,7 @@ SELECT t.id  AS termrelationship_id,
        rf.id AS reference_file_id,
        NULL  AS metadata_id
 FROM maurodatamapper.terminology.term_relationship t
-     INNER JOIN maurodatamapper.core.reference_file rf ON rf.catalogue_item_id = t.id AND rf.catalogue_item_domain_type = 'TermRelationship';
+     INNER JOIN maurodatamapper.core.reference_file rf ON rf.multi_facet_aware_item_id = t.id AND rf.multi_facet_aware_item_domain_type = 'TermRelationship';
 
 INSERT INTO maurodatamapper.terminology.join_termrelationship_to_facet(termrelationship_id, classifier_id, annotation_id,
                                                                        semantic_link_id, reference_file_id,
@@ -81,4 +81,4 @@ SELECT t.id  AS termrelationship_id,
        NULL  AS reference_file_id,
        md.id AS metadata_id
 FROM maurodatamapper.terminology.term_relationship t
-     INNER JOIN maurodatamapper.core.metadata md ON md.catalogue_item_id = t.id AND md.catalogue_item_domain_type = 'TermRelationship';
+     INNER JOIN maurodatamapper.core.metadata md ON md.multi_facet_aware_item_id = t.id AND md.multi_facet_aware_item_domain_type = 'TermRelationship';

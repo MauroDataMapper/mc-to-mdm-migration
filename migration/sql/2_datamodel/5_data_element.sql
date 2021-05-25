@@ -59,7 +59,7 @@ SELECT de.id  AS dataelement_id,
        NULL   AS metadata_id,
        NULL   AS summary_metadata_id
 FROM maurodatamapper.datamodel.data_element de
-     INNER JOIN maurodatamapper.core.annotation ann ON ann.catalogue_item_id = de.id AND ann.catalogue_item_domain_type = 'DataElement';
+     INNER JOIN maurodatamapper.core.annotation ann ON ann.multi_facet_aware_item_id = de.id AND ann.multi_facet_aware_item_domain_type = 'DataElement';
 
 INSERT INTO maurodatamapper.datamodel.join_dataelement_to_facet(dataelement_id, classifier_id, annotation_id, semantic_link_id, reference_file_id,
                                                                 metadata_id, summary_metadata_id)
@@ -71,7 +71,7 @@ SELECT de.id AS dataelement_id,
        NULL  AS metadata_id,
        NULL  AS summary_metadata_id
 FROM maurodatamapper.datamodel.data_element de
-     INNER JOIN maurodatamapper.core.semantic_link sl ON sl.catalogue_item_id = de.id AND sl.catalogue_item_domain_type = 'DataElement';
+     INNER JOIN maurodatamapper.core.semantic_link sl ON sl.multi_facet_aware_item_id = de.id AND sl.multi_facet_aware_item_domain_type = 'DataElement';
 
 INSERT INTO maurodatamapper.datamodel.join_dataelement_to_facet(dataelement_id, classifier_id, annotation_id, semantic_link_id, reference_file_id,
                                                                 metadata_id, summary_metadata_id)
@@ -83,7 +83,7 @@ SELECT de.id AS dataelement_id,
        NULL  AS metadata_id,
        NULL  AS summary_metadata_id
 FROM maurodatamapper.datamodel.data_element de
-     INNER JOIN maurodatamapper.core.reference_file rf ON rf.catalogue_item_id = de.id AND rf.catalogue_item_domain_type = 'DataElement';
+     INNER JOIN maurodatamapper.core.reference_file rf ON rf.multi_facet_aware_item_id = de.id AND rf.multi_facet_aware_item_domain_type = 'DataElement';
 
 INSERT INTO maurodatamapper.datamodel.join_dataelement_to_facet(dataelement_id, classifier_id, annotation_id, semantic_link_id, reference_file_id,
                                                                 metadata_id, summary_metadata_id)
@@ -95,7 +95,7 @@ SELECT de.id AS dataelement_id,
        md.id AS metadata_id,
        NULL  AS summary_metadata_id
 FROM maurodatamapper.datamodel.data_element de
-     INNER JOIN maurodatamapper.core.metadata md ON md.catalogue_item_id = de.id AND md.catalogue_item_domain_type = 'DataElement';
+     INNER JOIN maurodatamapper.core.metadata md ON md.multi_facet_aware_item_id = de.id AND md.multi_facet_aware_item_domain_type = 'DataElement';
 
 INSERT INTO maurodatamapper.datamodel.join_dataelement_to_facet(dataelement_id, classifier_id, annotation_id, semantic_link_id, reference_file_id,
                                                                 metadata_id, summary_metadata_id)
@@ -107,4 +107,4 @@ SELECT de.id AS dataelement_id,
        NULL  AS metadata_id,
        sm.id AS summary_metadata_id
 FROM maurodatamapper.datamodel.data_element de
-     INNER JOIN maurodatamapper.datamodel.summary_metadata sm ON sm.catalogue_item_id = de.id AND sm.catalogue_item_domain_type = 'DataElement';
+     INNER JOIN maurodatamapper.datamodel.summary_metadata sm ON sm.multi_facet_aware_item_id = de.id AND sm.multi_facet_aware_item_domain_type = 'DataElement';

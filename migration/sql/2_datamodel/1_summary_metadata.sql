@@ -1,5 +1,5 @@
-INSERT INTO maurodatamapper.datamodel.summary_metadata(id, version, summary_metadata_type, date_created, last_updated, catalogue_item_domain_type,
-                                                       catalogue_item_id, created_by, label, description)
+INSERT INTO maurodatamapper.datamodel.summary_metadata(id, version, summary_metadata_type, date_created, last_updated, multi_facet_aware_item_domain_type,
+                                                       multi_facet_aware_item_id, created_by, label, description)
 SELECT sm.id,
        sm.version,
        UPPER(summary_metadata_type),

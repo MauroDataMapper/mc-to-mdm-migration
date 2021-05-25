@@ -1,4 +1,4 @@
-INSERT INTO maurodatamapper.core.metadata(id, version, date_created, last_updated, catalogue_item_domain_type, namespace, catalogue_item_id, value,
+INSERT INTO maurodatamapper.core.metadata(id, version, date_created, last_updated, multi_facet_aware_item_domain_type, namespace, multi_facet_aware_item_id, value,
                                           created_by, key)
 SELECT m.id,
        m.version,
@@ -13,9 +13,9 @@ SELECT m.id,
                THEN 'CodeSet'
            WHEN term_id IS NOT NULL
                THEN 'Term'
-       END                                                               AS catalogue_item_domain_type,
+       END                                                               AS multi_facet_aware_item_domain_type,
        m.namespace,
-       coalesce(catalogue_item_id, terminology_id, code_set_id, term_id) AS catalogue_item_id,
+       coalesce(catalogue_item_id, terminology_id, code_set_id, term_id) AS multi_facet_aware_item_id,
        m.value,
        u.email_address,
        m.key

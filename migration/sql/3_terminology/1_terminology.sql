@@ -44,17 +44,17 @@ FROM maurodatamapper.metadatacatalogue.terminology t
      INNER JOIN maurodatamapper.metadatacatalogue.catalogue_user u ON t.created_by_id = u.id;
 
 
-INSERT INTO maurodatamapper.core.version_link(id, version, date_created, last_updated, catalogue_item_domain_type, target_model_domain_type,
-                                              link_type, target_model_id, catalogue_item_id, created_by)
+INSERT INTO maurodatamapper.core.version_link(id, version, date_created, last_updated, multi_facet_aware_item_domain_type, target_model_domain_type,
+                                              link_type, target_model_id, multi_facet_aware_item_id, created_by)
 SELECT uuid_generate_v4()              AS id,
        0                               AS version,
        current_timestamp               AS date_created,
        current_timestamp               AS last_updated,
-       'Terminology'                   AS catalogue_item_domain_type,
+       'Terminology'                   AS multi_facet_aware_item_domain_type,
        'Terminology'                   AS target_model_domain_type,
        'SUPERSEDED_BY_DOCUMENTATION'   AS link_type,
        source.superseded_by_id         AS target_model_id,
-       source.id                       AS catalogue_item_id,
+       source.id                       AS multi_facet_aware_item_id,
        'migration@maurodatamapper.com' AS created_by
 FROM maurodatamapper.metadatacatalogue.terminology source
 WHERE superseded_by_id IS NOT NULL;
@@ -70,23 +70,23 @@ INSERT INTO maurodatamapper.terminology.join_terminology_to_facet(terminology_id
 SELECT t.id   AS terminology_id,
        ann.id AS annotation_id
 FROM maurodatamapper.terminology.terminology t
-     INNER JOIN maurodatamapper.core.annotation ann ON ann.catalogue_item_id = t.id AND ann.catalogue_item_domain_type = 'Terminology';
+     INNER JOIN maurodatamapper.core.annotation ann ON ann.multi_facet_aware_item_id = t.id AND ann.multi_facet_aware_item_domain_type = 'Terminology';
 
 
 INSERT INTO maurodatamapper.terminology.join_terminology_to_facet(terminology_id, version_link_id)
 SELECT t.id  AS terminology_id,
        vl.id AS version_link_id
 FROM maurodatamapper.terminology.terminology t
-     INNER JOIN maurodatamapper.core.version_link vl ON vl.catalogue_item_id = t.id AND vl.catalogue_item_domain_type = 'Terminology';
+     INNER JOIN maurodatamapper.core.version_link vl ON vl.multi_facet_aware_item_id = t.id AND vl.multi_facet_aware_item_domain_type = 'Terminology';
 
 INSERT INTO maurodatamapper.terminology.join_terminology_to_facet(terminology_id, reference_file_id)
 SELECT t.id  AS terminology_id,
        rf.id AS reference_file_id
 FROM maurodatamapper.terminology.terminology t
-     INNER JOIN maurodatamapper.core.reference_file rf ON rf.catalogue_item_id = t.id AND rf.catalogue_item_domain_type = 'Terminology';
+     INNER JOIN maurodatamapper.core.reference_file rf ON rf.multi_facet_aware_item_id = t.id AND rf.multi_facet_aware_item_domain_type = 'Terminology';
 
 INSERT INTO maurodatamapper.terminology.join_terminology_to_facet(terminology_id, metadata_id)
 SELECT t.id  AS terminology_id,
        md.id AS metadata_id
 FROM maurodatamapper.terminology.terminology t
-     INNER JOIN maurodatamapper.core.metadata md ON md.catalogue_item_id = t.id AND md.catalogue_item_domain_type = 'Terminology';
+     INNER JOIN maurodatamapper.core.metadata md ON md.multi_facet_aware_item_id = t.id AND md.multi_facet_aware_item_domain_type = 'Terminology';

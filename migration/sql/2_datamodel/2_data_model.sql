@@ -62,34 +62,34 @@ INSERT INTO maurodatamapper.datamodel.join_datamodel_to_facet(datamodel_id, anno
 SELECT dm.id  AS datamodel_id,
        ann.id AS annotation_id
 FROM maurodatamapper.datamodel.data_model dm
-     INNER JOIN maurodatamapper.core.annotation ann ON ann.catalogue_item_id = dm.id AND ann.catalogue_item_domain_type = 'DataModel';
+     INNER JOIN maurodatamapper.core.annotation ann ON ann.multi_facet_aware_item_id = dm.id AND ann.multi_facet_aware_item_domain_type = 'DataModel';
 
 INSERT INTO maurodatamapper.datamodel.join_datamodel_to_facet(datamodel_id, semantic_link_id)
 SELECT dm.id AS datamodel_id,
        sl.id AS semantic_link_id
 FROM maurodatamapper.datamodel.data_model dm
-     INNER JOIN maurodatamapper.core.semantic_link sl ON sl.catalogue_item_id = dm.id AND sl.catalogue_item_domain_type = 'DataModel';
+     INNER JOIN maurodatamapper.core.semantic_link sl ON sl.multi_facet_aware_item_id = dm.id AND sl.multi_facet_aware_item_domain_type = 'DataModel';
 
 INSERT INTO maurodatamapper.datamodel.join_datamodel_to_facet(datamodel_id, version_link_id)
 SELECT dm.id AS datamodel_id,
        vl.id AS version_link_id
 FROM maurodatamapper.datamodel.data_model dm
-     INNER JOIN maurodatamapper.core.version_link vl ON vl.catalogue_item_id = dm.id AND vl.catalogue_item_domain_type = 'DataModel';
+     INNER JOIN maurodatamapper.core.version_link vl ON vl.multi_facet_aware_item_id = dm.id AND vl.multi_facet_aware_item_domain_type = 'DataModel';
 
 INSERT INTO maurodatamapper.datamodel.join_datamodel_to_facet(datamodel_id, reference_file_id)
 SELECT dm.id AS datamodel_id,
        rf.id AS reference_file_id
 FROM maurodatamapper.datamodel.data_model dm
-     INNER JOIN maurodatamapper.core.reference_file rf ON rf.catalogue_item_id = dm.id AND rf.catalogue_item_domain_type = 'DataModel';
+     INNER JOIN maurodatamapper.core.reference_file rf ON rf.multi_facet_aware_item_id = dm.id AND rf.multi_facet_aware_item_domain_type = 'DataModel';
 
 INSERT INTO maurodatamapper.datamodel.join_datamodel_to_facet(datamodel_id, metadata_id)
 SELECT dm.id AS datamodel_id,
        md.id AS metadata_id
 FROM maurodatamapper.datamodel.data_model dm
-     INNER JOIN maurodatamapper.core.metadata md ON md.catalogue_item_id = dm.id AND md.catalogue_item_domain_type = 'DataModel';
+     INNER JOIN maurodatamapper.core.metadata md ON md.multi_facet_aware_item_id = dm.id AND md.multi_facet_aware_item_domain_type = 'DataModel';
 
 INSERT INTO maurodatamapper.datamodel.join_datamodel_to_facet(datamodel_id, summary_metadata_id)
 SELECT dm.id AS datamodel_id,
        sm.id AS summary_metadata_id
 FROM maurodatamapper.datamodel.data_model dm
-     INNER JOIN maurodatamapper.datamodel.summary_metadata sm ON sm.catalogue_item_id = dm.id AND sm.catalogue_item_domain_type = 'DataModel';
+     INNER JOIN maurodatamapper.datamodel.summary_metadata sm ON sm.multi_facet_aware_item_id = dm.id AND sm.multi_facet_aware_item_domain_type = 'DataModel';

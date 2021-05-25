@@ -53,28 +53,28 @@ INSERT INTO maurodatamapper.terminology.join_codeset_to_facet(codeset_id, annota
 SELECT cs.id  AS code_set_id,
        ann.id AS annotation_id
 FROM maurodatamapper.terminology.code_set cs
-     INNER JOIN maurodatamapper.core.annotation ann ON ann.catalogue_item_id = cs.id AND ann.catalogue_item_domain_type = 'CodeSet';
+     INNER JOIN maurodatamapper.core.annotation ann ON ann.multi_facet_aware_item_id = cs.id AND ann.multi_facet_aware_item_domain_type = 'CodeSet';
 
 INSERT INTO maurodatamapper.terminology.join_codeset_to_facet(codeset_id, semantic_link_id)
 SELECT cs.id AS code_set_id,
        sl.id AS semantic_link_id
 FROM maurodatamapper.terminology.code_set cs
-     INNER JOIN maurodatamapper.core.semantic_link sl ON sl.catalogue_item_id = cs.id AND sl.catalogue_item_domain_type = 'CodeSet';
+     INNER JOIN maurodatamapper.core.semantic_link sl ON sl.multi_facet_aware_item_id = cs.id AND sl.multi_facet_aware_item_domain_type = 'CodeSet';
 
 INSERT INTO maurodatamapper.terminology.join_codeset_to_facet(codeset_id, version_link_id)
 SELECT cs.id AS code_set_id,
        vl.id AS version_link_id
 FROM maurodatamapper.terminology.code_set cs
-     INNER JOIN maurodatamapper.core.version_link vl ON vl.catalogue_item_id = cs.id AND vl.catalogue_item_domain_type = 'CodeSet';
+     INNER JOIN maurodatamapper.core.version_link vl ON vl.multi_facet_aware_item_id = cs.id AND vl.multi_facet_aware_item_domain_type = 'CodeSet';
 
 INSERT INTO maurodatamapper.terminology.join_codeset_to_facet(codeset_id, reference_file_id)
 SELECT cs.id AS code_set_id,
        rf.id AS reference_file_id
 FROM maurodatamapper.terminology.code_set cs
-     INNER JOIN maurodatamapper.core.reference_file rf ON rf.catalogue_item_id = cs.id AND rf.catalogue_item_domain_type = 'CodeSet';
+     INNER JOIN maurodatamapper.core.reference_file rf ON rf.multi_facet_aware_item_id = cs.id AND rf.multi_facet_aware_item_domain_type = 'CodeSet';
 
 INSERT INTO maurodatamapper.terminology.join_codeset_to_facet(codeset_id, metadata_id)
 SELECT cs.id AS code_set_id,
        md.id AS metadata_id
 FROM maurodatamapper.terminology.code_set cs
-     INNER JOIN maurodatamapper.core.metadata md ON md.catalogue_item_id = cs.id AND md.catalogue_item_domain_type = 'CodeSet';
+     INNER JOIN maurodatamapper.core.metadata md ON md.multi_facet_aware_item_id = cs.id AND md.multi_facet_aware_item_domain_type = 'CodeSet';

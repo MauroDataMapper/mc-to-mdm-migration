@@ -1,4 +1,4 @@
-INSERT INTO maurodatamapper.core.annotation(id, version, date_created, last_updated, path, catalogue_item_domain_type, depth, catalogue_item_id,
+INSERT INTO maurodatamapper.core.annotation(id, version, date_created, last_updated, path, multi_facet_aware_item_domain_type, depth, multi_facet_aware_item_id,
                                             parent_annotation_id, created_by, label, description, child_annotations_idx)
 SELECT ann.id,
        ann.version,
@@ -14,9 +14,9 @@ SELECT ann.id,
                THEN 'CodeSet'
            WHEN annotated_term_id IS NOT NULL
                THEN 'Term'
-       END                                                                                                  AS catalogue_item_domain_type,
+       END                                                                                                  AS multi_facet_aware_item_domain_type,
        ann.depth - 1                                                                                        AS depth,
-       coalesce(annotated_component_id, annotated_terminology_id, annotated_code_set_id, annotated_term_id) AS catalogue_item_id,
+       coalesce(annotated_component_id, annotated_terminology_id, annotated_code_set_id, annotated_term_id) AS multi_facet_aware_item_id,
        ann.parent_annotation_id,
        u.email_address                                                                                      AS created_by,
        ann.label,
