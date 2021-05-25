@@ -2,7 +2,7 @@
  Classifier
  */
 INSERT INTO maurodatamapper.security.securable_resource_group_role(id, version, securable_resource_id, user_group_id, date_created,
-                                                                   securable_resource_domain_type, last_updated, group_role_id, finalised_model,
+                                                                   securable_resource_domain_type, last_updated, group_role_id,
                                                                    created_by)
 SELECT uuid_generate_v4()              AS id,
        0                               AS version,
@@ -12,14 +12,13 @@ SELECT uuid_generate_v4()              AS id,
        'Classifier'                    AS securable_resource_domain_type,
        current_timestamp               AS last_updated,
        gr.id                           AS group_role_id,
-       NULL                            AS finalised_model,
        'migration@maurodatamapper.com' AS created_by
 FROM maurodatamapper.metadatacatalogue.join_classifier_to_readable_user_group jc,
      maurodatamapper.security.group_role gr
 WHERE gr.name = 'reader';
 
 INSERT INTO maurodatamapper.security.securable_resource_group_role(id, version, securable_resource_id, user_group_id, date_created,
-                                                                   securable_resource_domain_type, last_updated, group_role_id, finalised_model,
+                                                                   securable_resource_domain_type, last_updated, group_role_id,
                                                                    created_by)
 SELECT uuid_generate_v4()              AS id,
        0                               AS version,
@@ -29,7 +28,6 @@ SELECT uuid_generate_v4()              AS id,
        'Classifier'                    AS securable_resource_domain_type,
        current_timestamp               AS last_updated,
        gr.id                           AS group_role_id,
-       NULL                            AS finalised_model,
        'migration@maurodatamapper.com' AS created_by
 FROM maurodatamapper.metadatacatalogue.join_classifier_to_writeable_user_group jc,
      maurodatamapper.security.group_role gr
@@ -39,7 +37,7 @@ WHERE gr.name = 'container_admin';
  CodeSet
  */
 INSERT INTO maurodatamapper.security.securable_resource_group_role(id, version, securable_resource_id, user_group_id, date_created,
-                                                                   securable_resource_domain_type, last_updated, group_role_id, finalised_model,
+                                                                   securable_resource_domain_type, last_updated, group_role_id,
                                                                    created_by)
 SELECT uuid_generate_v4()              AS id,
        0                               AS version,
@@ -49,7 +47,6 @@ SELECT uuid_generate_v4()              AS id,
        'CodeSet'                       AS securable_resource_domain_type,
        current_timestamp               AS last_updated,
        gr.id                           AS group_role_id,
-       cs.finalised                    AS finalised_model,
        'migration@maurodatamapper.com' AS created_by
 FROM maurodatamapper.metadatacatalogue.join_code_set_to_readable_user_group jc
      INNER JOIN maurodatamapper.metadatacatalogue.code_set cs ON cs.id = jc.code_set_id,
@@ -57,7 +54,7 @@ FROM maurodatamapper.metadatacatalogue.join_code_set_to_readable_user_group jc
 WHERE gr.name = 'reader';
 
 INSERT INTO maurodatamapper.security.securable_resource_group_role(id, version, securable_resource_id, user_group_id, date_created,
-                                                                   securable_resource_domain_type, last_updated, group_role_id, finalised_model,
+                                                                   securable_resource_domain_type, last_updated, group_role_id,
                                                                    created_by)
 SELECT uuid_generate_v4()              AS id,
        0                               AS version,
@@ -67,7 +64,6 @@ SELECT uuid_generate_v4()              AS id,
        'CodeSet'                       AS securable_resource_domain_type,
        current_timestamp               AS last_updated,
        gr.id                           AS group_role_id,
-       cs.finalised                    AS finalised_model,
        'migration@maurodatamapper.com' AS created_by
 FROM maurodatamapper.metadatacatalogue.join_code_set_to_writeable_user_group jc
      INNER JOIN maurodatamapper.metadatacatalogue.code_set cs ON cs.id = jc.code_set_id,
@@ -78,7 +74,7 @@ WHERE gr.name = 'container_admin';
  DataModel
  */
 INSERT INTO maurodatamapper.security.securable_resource_group_role(id, version, securable_resource_id, user_group_id, date_created,
-                                                                   securable_resource_domain_type, last_updated, group_role_id, finalised_model,
+                                                                   securable_resource_domain_type, last_updated, group_role_id,
                                                                    created_by)
 SELECT uuid_generate_v4()              AS id,
        0                               AS version,
@@ -88,7 +84,6 @@ SELECT uuid_generate_v4()              AS id,
        'DataModel'                     AS securable_resource_domain_type,
        current_timestamp               AS last_updated,
        gr.id                           AS group_role_id,
-       dm.finalised                    AS finalised_model,
        'migration@maurodatamapper.com' AS created_by
 FROM maurodatamapper.metadatacatalogue.join_data_model_to_readable_user_group jc
      INNER JOIN maurodatamapper.metadatacatalogue.data_model dm ON dm.id = jc.data_model_id,
@@ -96,7 +91,7 @@ FROM maurodatamapper.metadatacatalogue.join_data_model_to_readable_user_group jc
 WHERE gr.name = 'reader';
 
 INSERT INTO maurodatamapper.security.securable_resource_group_role(id, version, securable_resource_id, user_group_id, date_created,
-                                                                   securable_resource_domain_type, last_updated, group_role_id, finalised_model,
+                                                                   securable_resource_domain_type, last_updated, group_role_id,
                                                                    created_by)
 SELECT uuid_generate_v4()              AS id,
        0                               AS version,
@@ -106,7 +101,6 @@ SELECT uuid_generate_v4()              AS id,
        'DataModel'                     AS securable_resource_domain_type,
        current_timestamp               AS last_updated,
        gr.id                           AS group_role_id,
-       dm.finalised                    AS finalised_model,
        'migration@maurodatamapper.com' AS created_by
 FROM maurodatamapper.metadatacatalogue.join_data_model_to_writeable_user_group jc
      INNER JOIN maurodatamapper.metadatacatalogue.data_model dm ON dm.id = jc.data_model_id,
@@ -117,7 +111,7 @@ WHERE gr.name = 'container_admin';
  Folder
  */
 INSERT INTO maurodatamapper.security.securable_resource_group_role(id, version, securable_resource_id, user_group_id, date_created,
-                                                                   securable_resource_domain_type, last_updated, group_role_id, finalised_model,
+                                                                   securable_resource_domain_type, last_updated, group_role_id,
                                                                    created_by)
 SELECT uuid_generate_v4()              AS id,
        0                               AS version,
@@ -127,14 +121,13 @@ SELECT uuid_generate_v4()              AS id,
        'Folder'                        AS securable_resource_domain_type,
        current_timestamp               AS last_updated,
        gr.id                           AS group_role_id,
-       NULL                            AS finalised_model,
        'migration@maurodatamapper.com' AS created_by
 FROM maurodatamapper.metadatacatalogue.join_folder_to_readable_user_group jc,
      maurodatamapper.security.group_role gr
 WHERE gr.name = 'reader';
 
 INSERT INTO maurodatamapper.security.securable_resource_group_role(id, version, securable_resource_id, user_group_id, date_created,
-                                                                   securable_resource_domain_type, last_updated, group_role_id, finalised_model,
+                                                                   securable_resource_domain_type, last_updated, group_role_id,
                                                                    created_by)
 SELECT uuid_generate_v4()              AS id,
        0                               AS version,
@@ -144,7 +137,6 @@ SELECT uuid_generate_v4()              AS id,
        'Folder'                        AS securable_resource_domain_type,
        current_timestamp               AS last_updated,
        gr.id                           AS group_role_id,
-       NULL                            AS finalised_model,
        'migration@maurodatamapper.com' AS created_by
 FROM maurodatamapper.metadatacatalogue.join_folder_to_writeable_user_group jc,
      maurodatamapper.security.group_role gr
@@ -154,7 +146,7 @@ WHERE gr.name = 'container_admin';
  Terminology
  */
 INSERT INTO maurodatamapper.security.securable_resource_group_role(id, version, securable_resource_id, user_group_id, date_created,
-                                                                   securable_resource_domain_type, last_updated, group_role_id, finalised_model,
+                                                                   securable_resource_domain_type, last_updated, group_role_id,
                                                                    created_by)
 SELECT uuid_generate_v4()              AS id,
        0                               AS version,
@@ -164,7 +156,6 @@ SELECT uuid_generate_v4()              AS id,
        'Terminology'                   AS securable_resource_domain_type,
        current_timestamp               AS last_updated,
        gr.id                           AS group_role_id,
-       t.finalised                     AS finalised_model,
        'migration@maurodatamapper.com' AS created_by
 FROM maurodatamapper.metadatacatalogue.join_terminology_to_readable_user_group jc
      INNER JOIN maurodatamapper.metadatacatalogue.data_model t ON t.id = jc.terminology_id,
@@ -172,7 +163,7 @@ FROM maurodatamapper.metadatacatalogue.join_terminology_to_readable_user_group j
 WHERE gr.name = 'reader';
 
 INSERT INTO maurodatamapper.security.securable_resource_group_role(id, version, securable_resource_id, user_group_id, date_created,
-                                                                   securable_resource_domain_type, last_updated, group_role_id, finalised_model,
+                                                                   securable_resource_domain_type, last_updated, group_role_id,
                                                                    created_by)
 SELECT uuid_generate_v4()              AS id,
        0                               AS version,
@@ -182,7 +173,6 @@ SELECT uuid_generate_v4()              AS id,
        'Terminology'                   AS securable_resource_domain_type,
        current_timestamp               AS last_updated,
        gr.id                           AS group_role_id,
-       t.finalised                     AS finalised_model,
        'migration@maurodatamapper.com' AS created_by
 FROM maurodatamapper.metadatacatalogue.join_terminology_to_writeable_user_group jc
      INNER JOIN maurodatamapper.metadatacatalogue.data_model t ON t.id = jc.terminology_id,

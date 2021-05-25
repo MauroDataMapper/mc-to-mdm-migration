@@ -54,7 +54,7 @@ FROM maurodatamapper.metadatacatalogue.join_data_model_to_writeable_catalogue_us
 Create securable resources using created groups
  */
 INSERT INTO maurodatamapper.security.securable_resource_group_role(id, version, securable_resource_id, user_group_id, date_created,
-                                                                   securable_resource_domain_type, last_updated, group_role_id, finalised_model,
+                                                                   securable_resource_domain_type, last_updated, group_role_id,
                                                                    created_by)
 SELECT uuid_generate_v4()              AS id,
        0                               AS version,
@@ -64,7 +64,6 @@ SELECT uuid_generate_v4()              AS id,
        'DataModel'                     AS securable_resource_domain_type,
        current_timestamp               AS last_updated,
        gr.id                           AS group_role_id,
-       dm.finalised                    AS finalised_model,
        'migration@maurodatamapper.com' AS created_by
 FROM maurodatamapper.metadatacatalogue.join_data_model_to_readable_catalogue_user jc
      INNER JOIN maurodatamapper.metadatacatalogue.data_model dm ON dm.id = jc.data_model_id
@@ -74,7 +73,7 @@ FROM maurodatamapper.metadatacatalogue.join_data_model_to_readable_catalogue_use
 WHERE gr.name = 'reader';
 
 INSERT INTO maurodatamapper.security.securable_resource_group_role(id, version, securable_resource_id, user_group_id, date_created,
-                                                                   securable_resource_domain_type, last_updated, group_role_id, finalised_model,
+                                                                   securable_resource_domain_type, last_updated, group_role_id,
                                                                    created_by)
 SELECT uuid_generate_v4()              AS id,
        0                               AS version,
@@ -84,7 +83,6 @@ SELECT uuid_generate_v4()              AS id,
        'DataModel'                     AS securable_resource_domain_type,
        current_timestamp               AS last_updated,
        gr.id                           AS group_role_id,
-       dm.finalised                    AS finalised_model,
        'migration@maurodatamapper.com' AS created_by
 FROM maurodatamapper.metadatacatalogue.join_data_model_to_writeable_catalogue_user jc
      INNER JOIN maurodatamapper.metadatacatalogue.data_model dm ON dm.id = jc.data_model_id
