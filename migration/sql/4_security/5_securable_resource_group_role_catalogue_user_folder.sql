@@ -65,7 +65,8 @@ FROM maurodatamapper.metadatacatalogue.join_folder_to_readable_catalogue_user jc
      INNER JOIN maurodatamapper.metadatacatalogue.folder f ON f.id = jc.folder_id
      INNER JOIN maurodatamapper.security.user_group ug ON ug.name = concat('Folder_', f.label, '_migrated-direct-reader'),
      maurodatamapper.security.group_role gr
-WHERE gr.name = 'reader';
+WHERE gr.name = 'reader'
+GROUP BY jc.folder_id, ug.id, gr.id;
 
 INSERT INTO maurodatamapper.security.securable_resource_group_role(id, version, securable_resource_id, user_group_id, date_created,
                                                                    securable_resource_domain_type, last_updated, group_role_id,
@@ -83,4 +84,5 @@ FROM maurodatamapper.metadatacatalogue.join_folder_to_writeable_catalogue_user j
      INNER JOIN maurodatamapper.metadatacatalogue.folder f ON f.id = jc.folder_id
      INNER JOIN maurodatamapper.security.user_group ug ON ug.name = concat('Folder_', f.label, '_migrated-direct-writer'),
      maurodatamapper.security.group_role gr
-WHERE gr.name = 'container_admin';
+WHERE gr.name = 'container_admin'
+GROUP BY jc.folder_id, ug.id, gr.id;

@@ -18,3 +18,8 @@ WHERE email_address NOT IN ('admin@maurodatamapper.com', 'unlogged_user@mdm-core
 DELETE
 FROM maurodatamapper.security.user_group
 WHERE name <> 'administrators';
+
+-- Add a unique index which is built into MDM but not the db
+-- This will ensure we fall migration in the event we got it wrong
+CREATE UNIQUE INDEX IF NOT EXISTS unique_index
+    ON security.securable_resource_group_role(user_group_id, securable_resource_id);
